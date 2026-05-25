@@ -48,6 +48,7 @@ public class MasterAPIRequestTest {
 	}
 	
 	
+	@Test
 	public void invalidTokenMasterApi() throws IOException {
 		given()
 		.baseUri(ConfigManager.getProperty("BASE_URI"))
