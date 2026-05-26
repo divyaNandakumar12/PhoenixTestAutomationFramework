@@ -27,8 +27,6 @@ on:
         type: choice
         options:
           - testng.xml
-          - smoke.xml
-          - regression.xml
         default: testng.xml
         required: true
 
