@@ -15,18 +15,14 @@ on:
       env:
         description: "Environment"
         type: choice
-        options:
-          - qa
-          - dev
-          - uat
+        options: [qa,dev,uat]
         default: qa
         required: true
 
       suiteXmlFile:
         description: "TestNG xml"
         type: choice
-        options:
-          - testng.xml
+        options: [testng.xml,smoke.xml,regression.xml]
         default: testng.xml
         required: true
 
