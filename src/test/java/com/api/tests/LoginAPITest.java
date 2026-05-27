@@ -11,6 +11,10 @@ import java.io.IOException;
 import org.testng.annotations.Test;
 
 import com.api.pojo.UserCredentials;
+import com.api.utils.SpecUtil;
+
+import static com.api.utils.SpecUtil.*;
+
 import static com.api.utils.ConfigManager.*;
 
 import io.restassured.http.ContentType;
@@ -21,23 +25,12 @@ public class LoginAPITest {
 	@Test
 	public void loginAPITest() throws IOException {
 		UserCredentials userCredentials=new UserCredentials("iamfd", "password");
-		given().baseUri(getProperty("BASE_URI"))
-		.contentType(ContentType.JSON)
-		.and()
-		.accept(ContentType.JSON)
-		.and()
-		.body(userCredentials)
-		.log().uri()
-		.log().method()
-		.log().body()
-		.log().headers()
+		given()
+		.spec(requestSpec(userCredentials))
 		.when()
 		.post("login")
 		.then()
-		.statusCode(200)
-		.log().all()
-		.time(lessThan(1500L))
-		.and()
+		.spec(SpecUtil.responseSpec_OK())
 		.body("message", equalTo("Success"))
 		.and()
 		.body("data.token", notNullValue())
