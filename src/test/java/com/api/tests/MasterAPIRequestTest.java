@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import static com.api.constants.Role.*;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -24,14 +25,11 @@ public class MasterAPIRequestTest {
 		
 		Header header=new Header("Authorization", AuthTokenProvider.getAuthToken(FD));
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URI"))
-		.header(header)
-		.contentType(ContentType.JSON)
-		.log().all()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 		.post("/master")
 		.then()
-		.statusCode(200)
+		.spec(SpecUtil.responseSpec_OK())
 		.body("message", equalTo("Success"))
 		.body("data", notNullValue())
 		.time(lessThan(1000L))
@@ -51,14 +49,11 @@ public class MasterAPIRequestTest {
 	@Test
 	public void invalidTokenMasterApi() throws IOException {
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URI"))
-		.header(new Header("Authorization", ""))
-		.contentType(ContentType.JSON)
-		.log().all()
+		.spec(SpecUtil.requestSpec())
 		.when()
 		.post("/master")
 		.then()
-		.statusCode(401);
+		.spec(SpecUtil.responseSpecWithStatusCode_TEXT(401));
 	}
 
 }
