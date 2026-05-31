@@ -13,7 +13,7 @@ import com.api.utils.SpecUtil;
 
 public class UserDetailsFDTest {
 	
-	@Test
+	@Test(description = "Verify if the user details API response is shown correctly",groups = {"api","smoke","regression"})
 	public void userDetailsAPI() throws IOException {
 	
 		given()
