@@ -14,7 +14,7 @@ import java.io.IOException;
 import org.hamcrest.Matchers;
 
 import com.api.constants.Role;
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 public class SpecUtil {
 

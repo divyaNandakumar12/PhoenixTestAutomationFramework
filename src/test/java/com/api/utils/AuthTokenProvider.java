@@ -7,7 +7,7 @@ import java.io.IOException;
 import static com.api.constants.Role.*;
 
 import com.api.constants.Role;
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 import io.restassured.http.ContentType;
 
