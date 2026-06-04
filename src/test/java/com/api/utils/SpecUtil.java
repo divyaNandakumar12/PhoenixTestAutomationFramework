@@ -26,11 +26,17 @@ public class SpecUtil {
 		return requestSpecification;
 	}
 
-	public static RequestSpecification requestSpec(Object object) throws IOException {
+	public static RequestSpecification requestSpec(Object object) {
 
-		RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
-				.setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(object)
-				.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+		RequestSpecification requestSpecification=null;
+		try {
+			requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
+					.setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(object)
+					.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return requestSpecification;
 	}
 	
