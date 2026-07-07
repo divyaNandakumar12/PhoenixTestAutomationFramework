@@ -33,7 +33,7 @@ public class CreateJobApiDataDrivenTest {
 	private CreateJobPayload createJobPayload;
 
 	@Test(description = "Verify if create job api ia able to create inwarrenty job", groups = { "api", "regression",
-			"datadriven" },
+			"datadriven","csv" },
 			dataProviderClass  = com.dataproviders.DataProviderUtil.class,
 			dataProvider = "CreateJobAPIDataProvider")
 	public void createJobApiTest(CreateJobPayload createJobPayload) throws IOException {
