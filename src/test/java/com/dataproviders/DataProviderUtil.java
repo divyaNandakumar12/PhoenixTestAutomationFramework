@@ -9,32 +9,38 @@ import org.testng.annotations.DataProvider;
 import com.api.request.model.CreateJobPayload;
 import com.api.utils.CSVReaderUtil;
 import com.api.utils.CreateJobBeanMapper;
+import com.api.utils.FakerDataGenerator;
 import com.dataproviders.api.bean.CreateJobBean;
 import com.dataproviders.api.bean.UserBean;
 
 public class DataProviderUtil {
-	
-	
-	@DataProvider(name = "LoginAPIDataProvider",parallel = true)
+
+	@DataProvider(name = "LoginAPIDataProvider", parallel = true)
 	public static Iterator<UserBean> loginAPIDataProvider() {
-		return CSVReaderUtil.loadCSV("testData/LoginCreds.csv",UserBean.class);
+		return CSVReaderUtil.loadCSV("testData/LoginCreds.csv", UserBean.class);
 	}
-	
-	
-	
-	@DataProvider(name = "CreateJobAPIDataProvider",parallel = true)
+
+	@DataProvider(name = "CreateJobAPIDataProvider", parallel = true)
 	public static Iterator<CreateJobPayload> createJobDataProvider() {
-		Iterator<CreateJobBean> iterator=CSVReaderUtil.loadCSV("testData/CreateJobData.csv",CreateJobBean.class);
-		List<CreateJobPayload> payloadList=new ArrayList<CreateJobPayload>();
+		Iterator<CreateJobBean> iterator = CSVReaderUtil.loadCSV("testData/CreateJobData.csv", CreateJobBean.class);
+		List<CreateJobPayload> payloadList = new ArrayList<CreateJobPayload>();
 		CreateJobBean tempBean;
 		CreateJobPayload tempPayload;
-		while(iterator.hasNext()) {
-			tempBean=iterator.next();
-			tempPayload=CreateJobBeanMapper.mapper(tempBean);
+		while (iterator.hasNext()) {
+			tempBean = iterator.next();
+			tempPayload = CreateJobBeanMapper.mapper(tempBean);
 			payloadList.add(tempPayload);
 		}
-		
+
 		return payloadList.iterator();
+	}
+
+	@DataProvider(name = "createJobAPIFakerDataProvider", parallel = true)
+	public static Iterator<CreateJobPayload> createJobAPIFakerDataProvider() {
+		String countString = System.getProperty("fakerCount", "5");
+		int fakerCountInt = Integer.parseInt(countString);
+		Iterator<CreateJobPayload> payloadIterator = FakerDataGenerator.generateFakeCreateJobData(fakerCountInt);
+		return payloadIterator;
 	}
 
 }

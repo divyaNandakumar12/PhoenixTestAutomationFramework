@@ -1,4 +1,4 @@
-package com.api.tests.dataDriven;
+package com.api.tests;
 
 import static com.api.utils.DateTimeUtil.getTimeWithDaysAgo;
 import static io.restassured.RestAssured.given;
@@ -9,6 +9,8 @@ import static org.hamcrest.Matchers.startsWith;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,17 +28,25 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
+import com.api.utils.DateTimeUtil;
+import com.api.utils.FakerDataGenerator;
+import com.github.javafaker.Faker;
+
 import static com.api.utils.SpecUtil.*;
 
-public class CreateJobApiDataDrivenTest {
+public class CreateJobApiTestWithFakeData {
 
 	private CreateJobPayload createJobPayload;
+	private static final String COUNTRY="India";
+	@BeforeMethod(description = "Creating createjob api request payload")
+	public void setup() {
+		
+		createJobPayload=FakerDataGenerator.generateFakeCreateJobData();
+	}
 
 	@Test(description = "Verify if create job api ia able to create inwarrenty job", groups = { "api", "regression",
-			"datadriven","csv" },
-			dataProviderClass  = com.dataproviders.DataProviderUtil.class,
-			dataProvider = "CreateJobAPIDataProvider")
-	public void createJobApiTest(CreateJobPayload createJobPayload) throws IOException {
+			"smoke" })
+	public void createJobApiTest() throws IOException {
 		         given().spec(requestSpecWithAuth(Role.FD, createJobPayload)).when().post("/job/create").then()
 				.spec(responseSpec_OK())
 				.body(matchesJsonSchemaInClasspath("responseSchema/createJobApiResponseSchema.json"))
