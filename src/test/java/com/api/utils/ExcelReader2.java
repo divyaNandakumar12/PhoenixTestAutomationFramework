@@ -19,10 +19,10 @@ import com.poiji.bind.Poiji;
 
 public class ExcelReader2 {
 
-	public static <T> Iterator<T> loadTestData(String sheetName,Class<T> clazz){
+	public static <T> Iterator<T> loadTestData(String fileName,String sheetName,Class<T> clazz){
 		
 		
-		InputStream isInputStream= Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/PhoenixTestData.xlsx");
+		InputStream isInputStream= Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		XSSFWorkbook myWorkbook = null;
 		try {
 			myWorkbook = new XSSFWorkbook(isInputStream);
