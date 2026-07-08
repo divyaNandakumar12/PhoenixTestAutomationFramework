@@ -1,0 +1,135 @@
+[
+	{
+	    "mst_service_location_id": 0,
+	    "mst_platform_id": 2,
+	    "mst_warrenty_status_id": 1,
+	    "mst_oem_id": 1,
+	    "customer": {
+	        "first_name": "Nathaniel",
+	        "last_name": "Collins",
+	        "mobile_number": "360-550-3422",
+	        "mobile_number_alt": "",
+	        "email_id": "Christina73@gmail.com",
+	        "email_id_alt": ""
+	    },
+	    "customer_address": {
+	        "flat_number": "1229",
+	        "apartment_name": "park villa",
+	        "street_name": "15th street",
+	        "landmark": "axis bank kolathur",
+	        "area": "poompuhar nagar",
+	        "pincode": "600099",
+	        "country": "India",
+	        "state": "Tamil Nadu"
+	    },
+	    "customer_product": {
+	        "dop": "2026-04-08T12:00:00.000Z",
+	        "serial_number": "50515485631589",
+	        "imei1": "50515485631589",
+	        "imei2": "50515485631589",
+	        "popurl": "2026-04-08T12:00:00.000Z",
+	        "product_id": 1,
+	        "mst_model_id": 1
+	    },
+	    "problems": [
+	        {
+	            "id": 1,
+	            "remark": "phone is running slow"
+	        },
+			{
+			            "id": 2,
+			            "remark": "not working"
+			        }
+	    ]
+	},
+	{
+		    "mst_service_location_id": 0,
+		    "mst_platform_id": 2,
+		    "mst_warrenty_status_id": 1,
+		    "mst_oem_id": 1,
+		    "customer": {
+		        "first_name": "Nathaniel",
+		        "last_name": "Collins",
+		        "mobile_number": "360-550-3422",
+		        "mobile_number_alt": "",
+		        "email_id": "Christina73@gmail.com",
+		        "email_id_alt": ""
+		    },
+		    "customer_address": {
+		        "flat_number": "1229",
+		        "apartment_name": "park villa",
+		        "street_name": "15th street",
+		        "landmark": "axis bank kolathur",
+		        "area": "poompuhar nagar",
+		        "pincode": "600099",
+		        "country": "India",
+		        "state": "Tamil Nadu"
+		    },
+		    "customer_product": {
+		        "dop": "2026-04-08T12:00:00.000Z",
+		        "serial_number": "51515485631587",
+		        "imei1": "51515485631587",
+		        "imei2": "51515485631587",
+		        "popurl": "2026-04-08T12:00:00.000Z",
+		        "product_id": 1,
+		        "mst_model_id": 1
+		    },
+		    "problems": [
+		        {
+		            "id": 1,
+		            "remark": "phone is running slow"
+		        },
+				{
+				            "id": 2,
+				            "remark": "not working"
+				        }
+		    ]
+		},
+		{
+			    "mst_service_location_id": 0,
+			    "mst_platform_id": 2,
+			    "mst_warrenty_status_id": 1,
+			    "mst_oem_id": 1,
+			    "customer": {
+			        "first_name": "Nathaniel",
+			        "last_name": "Collins",
+			        "mobile_number": "360-550-3422",
+			        "mobile_number_alt": "",
+			        "email_id": "Christina73@gmail.com",
+			        "email_id_alt": ""
+			    },
+			    "customer_address": {
+			        "flat_number": "1229",
+			        "apartment_name": "park villa",
+			        "street_name": "15th street",
+			        "landmark": "axis bank kolathur",
+			        "area": "poompuhar nagar",
+			        "pincode": "600099",
+			        "country": "India",
+			        "state": "Tamil Nadu"
+			    },
+			    "customer_product": {
+			        "dop": "2026-04-08T12:00:00.000Z",
+			        "serial_number": "52515485631587",
+			        "imei1": "52515485631587",
+			        "imei2": "52515485631587",
+			        "popurl": "2026-04-08T12:00:00.000Z",
+			        "product_id": 1,
+			        "mst_model_id": 1
+			    },
+			    "problems": [
+			        {
+			            "id": 1,
+			            "remark": "phone is running slow"
+			        },
+					{
+					            "id": 2,
+					            "remark": "not working"
+					        }
+			    ]
+			}
+	
+	
+	
+	
+]
