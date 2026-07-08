@@ -17,7 +17,7 @@ import com.dataproviders.api.bean.UserBean;
 import com.google.common.collect.Table.Cell;
 import com.poiji.bind.Poiji;
 
-public class ExcelReader2 {
+public class ExcelReaderUtil {
 
 	public static <T> Iterator<T> loadTestData(String fileName,String sheetName,Class<T> clazz){
 		
