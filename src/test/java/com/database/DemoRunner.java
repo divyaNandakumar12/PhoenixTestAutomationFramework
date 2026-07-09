@@ -6,9 +6,7 @@ public class DemoRunner {
 
 	public static void main(String[] args) throws SQLException {
 		
-		System.out.println(DatabaseManager.createConnection());
-		System.out.println(DatabaseManager.createConnection());
-		System.out.println(DatabaseManager.createConnection());
+		System.out.println(DatabaseManager.getConnection());
 
 	}
 
