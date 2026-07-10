@@ -30,9 +30,11 @@ import com.api.request.model.Problems;
 import com.database.dao.CustomerAddressDAO;
 import com.database.dao.CustomerDAO;
 import com.database.dao.CustomerProductDAO;
+import com.database.dao.MapJobProblemDAO;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -74,6 +76,7 @@ public class CreateJobApiTestWithDBValidation {
 		        JsonPath jsonPath=response.jsonPath();
 		        int customerId=jsonPath.getInt("data.tr_customer_id");
 		        int customerProductId=jsonPath.getInt("data.tr_customer_product_id");
+		        int tr_job_head_id=jsonPath.getInt("data.id");
 		        System.out.println(customerId);
 		        
 		        CustomerDBModel customerDBModel=CustomerDAO.getCustomerInfo(customerId);
@@ -114,6 +117,12 @@ public class CreateJobApiTestWithDBValidation {
 				Assert.assertEquals(customerProductDBModel.getImei2(), customerProduct.imei2());
 				Assert.assertEquals(customerProductDBModel.getPopurl(), customerProduct.popurl());
 				Assert.assertEquals(customerProductDBModel.getMst_model_id(), customerProduct.mst_model_id());
+				
+				MapJobProblemDBModel mapJobProblemDBModel=MapJobProblemDAO.getProblemInfo(tr_job_head_id);
+				System.out.println(mapJobProblemDBModel);
+				
+				Assert.assertEquals(mapJobProblemDBModel.getMst_problem_id(), createJobPayload.problems().get(0).id());
+				Assert.assertEquals(mapJobProblemDBModel.getRemark(), createJobPayload.problems().get(0).remark());
 				
 				
 	}

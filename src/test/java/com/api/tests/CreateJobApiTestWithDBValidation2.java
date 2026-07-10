@@ -31,9 +31,11 @@ import com.api.response.model.CreateJobResponseModel;
 import com.database.dao.CustomerAddressDAO;
 import com.database.dao.CustomerDAO;
 import com.database.dao.CustomerProductDAO;
+import com.database.dao.MapJobProblemDAO;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -46,17 +48,17 @@ public class CreateJobApiTestWithDBValidation2 {
 	private Customer customer;
 	private CustomerAddress customerAddress;
 	private CustomerProduct customerProduct;
+	private List<Problems> pr = new ArrayList<Problems>();
 
 	@BeforeMethod(description = "Creating createjob api request payload")
 	public void setup() {
 		customer = new Customer("Rowland", "Wunsch", "758-252-7805", "", "Libbie_Frami@yahoo.com", "");
 		customerAddress = new CustomerAddress("1229", "park villa", "15th street", "axis bank kolathur",
 				"poompuhar nagar", "600099", "India", "Tamil Nadu");
-		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "14238575534409",
-				"14238575534409", "14238575534409", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(),
-				Model.NEXUS_2_BLUE.getCode());
+		customerProduct = new CustomerProduct(getTimeWithDaysAgo(10), "14238575534409", "14238575534409",
+				"14238575534409", getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		Problems problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "phone is running slow");
-		List<Problems> pr = new ArrayList<Problems>();
+
 		pr.add(problems);
 		createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),
 				Platform.FRONT_DESK.getCode(), Warrenty.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer,
@@ -115,6 +117,15 @@ public class CreateJobApiTestWithDBValidation2 {
 				Assert.assertEquals(customerProductDBModel.getImei2(), customerProduct.imei2());
 				Assert.assertEquals(customerProductDBModel.getPopurl(), customerProduct.popurl());
 				Assert.assertEquals(customerProductDBModel.getMst_model_id(), customerProduct.mst_model_id());
+				
+				int tr_job_head_id=createJobResponseModel.getData().getId();
+				System.out.println(tr_job_head_id);
+				
+				MapJobProblemDBModel mapJobProblemDBModel=MapJobProblemDAO.getProblemInfo(tr_job_head_id);
+				System.out.println(mapJobProblemDBModel);
+				
+				Assert.assertEquals(mapJobProblemDBModel.getMst_problem_id(), pr.get(0).id());
+				Assert.assertEquals(mapJobProblemDBModel.getRemark(), pr.get(0).remark());
 				
 				
 	}
