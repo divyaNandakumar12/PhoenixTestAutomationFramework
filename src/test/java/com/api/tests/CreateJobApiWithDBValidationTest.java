@@ -30,10 +30,12 @@ import com.api.request.model.Problems;
 import com.database.dao.CustomerAddressDAO;
 import com.database.dao.CustomerDAO;
 import com.database.dao.CustomerProductDAO;
+import com.database.dao.JobHeadDAO;
 import com.database.dao.MapJobProblemDAO;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.JobHeadModel;
 import com.database.model.MapJobProblemDBModel;
 
 import io.restassured.path.json.JsonPath;
@@ -123,6 +125,15 @@ public class CreateJobApiWithDBValidationTest {
 				
 				Assert.assertEquals(mapJobProblemDBModel.getMst_problem_id(), createJobPayload.problems().get(0).id());
 				Assert.assertEquals(mapJobProblemDBModel.getRemark(), createJobPayload.problems().get(0).remark());
+				
+				JobHeadModel jobHeadModel=JobHeadDAO.getJobInfo(customerId);
+				System.out.println(jobHeadModel);
+				
+				Assert.assertEquals(jobHeadModel.getMst_service_location_id(), createJobPayload.mst_service_location_id());
+				Assert.assertEquals(jobHeadModel.getMst_warrenty_status_id(), createJobPayload.mst_warrenty_status_id());
+				Assert.assertEquals(jobHeadModel.getMst_platform_id(), createJobPayload.mst_platform_id());
+				Assert.assertEquals(jobHeadModel.getMst_oem_id(), createJobPayload.mst_oem_id());
+				
 				
 				
 	}
