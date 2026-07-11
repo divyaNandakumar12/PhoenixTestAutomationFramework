@@ -11,8 +11,6 @@
       <class name="com.api.tests.dataDriven.LoginAPIExcelDataDrivenTest"/>
       <class name="com.api.tests.dataDriven.CreateJobApiExcelDataDrivenTest"/>
       <class name="com.api.tests.dataDriven.CreateJobApiDBDataDrivenTest"/>
-      <class name="com.api.tests.CreateJobApiWithDBValidationWithResponseModelTest"/>
-      <class name="com.api.tests.CreateJobApiWithDBValidationTest"/>
     </classes>
   </test>
 </suite>
