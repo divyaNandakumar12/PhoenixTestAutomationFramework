@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.api.utils.ConfigManager;
 import com.api.utils.EnvUtilityClass;
+import com.api.utils.VaultDBConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -14,9 +15,10 @@ public class DatabaseManager {
 
 	}
 
-	private static final String DB_URL = EnvUtilityClass.getValue("DB_URL");
-	private static final String DB_USERNAME = EnvUtilityClass.getValue("DB_USERNAME");
-	private static final String DB_PASSWORD = EnvUtilityClass.getValue("DB_PASSWORD");
+	private static final String DB_URL = getDBValues("DB_URL");
+	private static final String DB_USERNAME = getDBValues("DB_USERNAME");
+	private static final String DB_PASSWORD = getDBValues("DB_PASSWORD");
+	private static boolean isVaultUp = true;
 	private static final int MAXIMUM_POOL_SIZE = Integer.parseInt(ConfigManager.getProperty("MAXIMUM_POOL_SIZE"));
 	private static final int MINIMUM_IDLE = Integer.parseInt(ConfigManager.getProperty("MINIMUM_IDLE"));
 	private static final int CONNECTION_TIMEOUT = Integer.parseInt(ConfigManager.getProperty("CONNECTION_TIMEOUT"));
@@ -27,12 +29,31 @@ public class DatabaseManager {
 	private static HikariConfig hikariConfig;
 	private static volatile HikariDataSource hikariDataSource;
 
+	private static String getDBValues(String key) {
+		String valueString = null;
+
+		if (isVaultUp)
+			valueString = VaultDBConfig.getSecretValue(key);
+		if (valueString == null) {
+			System.err.println("Vault is down or some issue with vault");
+			isVaultUp=false;
+		} else {
+			System.out.println("Reading value from vault");
+			return valueString;
+		}
+
+		System.out.println("READING VALUE FROM ENV...");
+		valueString = EnvUtilityClass.getValue(key);
+		return valueString;
+
+	}
+
 	private synchronized static void initializePool() {
 
 		if (hikariDataSource == null) {
 			synchronized (DatabaseManager.class) {
 				if (hikariDataSource == null) {
-					hikariConfig=new HikariConfig();
+					hikariConfig = new HikariConfig();
 					hikariConfig.setJdbcUrl(DB_URL);
 					hikariConfig.setUsername(DB_USERNAME);
 					hikariConfig.setPassword(DB_PASSWORD);
