@@ -15,6 +15,7 @@ import io.restassured.response.Response;
 public class DashboardService {
 	
 	private static final String COUNT_ENDPOINT = "/dashboard/count";
+	private static final String DETAILS_ENDPOINT = "/dashboard/details";
 
 	public Response count(Role role) {
 		Response response=null;
@@ -31,6 +32,18 @@ public class DashboardService {
 		Response response=null;
 		try {
 			response=given().spec(requestSpec()).when().get(COUNT_ENDPOINT);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	public Response details(Role role,Object payload) {
+		Response response=null;
+		try {
+			response=given().spec(requestSpecWithAuth(role)).body(payload)
+					.when().post(DETAILS_ENDPOINT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
