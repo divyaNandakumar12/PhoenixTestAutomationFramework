@@ -28,6 +28,7 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.api.response.model.CreateJobResponseModel;
+import com.api.services.JobService;
 import com.database.dao.CustomerAddressDAO;
 import com.database.dao.CustomerDAO;
 import com.database.dao.CustomerProductDAO;
@@ -51,8 +52,9 @@ public class CreateJobApiWithDBValidationWithResponseModelTest {
 	private CustomerAddress customerAddress;
 	private CustomerProduct customerProduct;
 	private List<Problems> pr = new ArrayList<Problems>();
+	private JobService jobService;
 
-	@BeforeMethod(description = "Creating createjob api request payload")
+	@BeforeMethod(description = "Creating createjob api request payload and instantiating the job service")
 	public void setup() {
 		customer = new Customer("Rowland", "Wunsch", "758-252-7805", "", "Libbie_Frami@yahoo.com", "");
 		customerAddress = new CustomerAddress("1229", "park villa", "15th street", "axis bank kolathur",
@@ -65,12 +67,13 @@ public class CreateJobApiWithDBValidationWithResponseModelTest {
 		createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(),
 				Platform.FRONT_DESK.getCode(), Warrenty.IN_WARRENTY.getCode(), OEM.GOOGLE.getCode(), customer,
 				customerAddress, customerProduct, pr);
+		jobService = new JobService();
 	}
 
 	@Test(description = "Verify if create job api ia able to create inwarrenty job", groups = { "api", "regression",
 			"smoke" })
 	public void createJobApiTest() throws IOException {
-		        CreateJobResponseModel createJobResponseModel= given().spec(requestSpecWithAuth(Role.FD, createJobPayload)).when().post("/job/create").then()
+		        CreateJobResponseModel createJobResponseModel= jobService.master(Role.FD, createJobPayload).then()
 				.spec(responseSpec_OK())
 				.body(matchesJsonSchemaInClasspath("responseSchema/createJobApiResponseSchema.json"))
 				.body("message", equalTo("Job created successfully. ")).body("data.mst_service_location_id", equalTo(1))
