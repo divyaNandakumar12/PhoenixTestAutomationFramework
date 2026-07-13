@@ -12,16 +12,28 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.IOException;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.api.request.model.UserCredentials;
+import com.api.services.AuthService;
+import com.api.services.DashboardService;
 
 import static com.api.utils.SpecUtil.*;
 
 public class CountAPIRequestTest {
 
+	private DashboardService dashboardService;
+
+	@BeforeMethod(description = "create the request payload for Count API")
+	public void setup() {
+		dashboardService = new DashboardService();
+	}
+
 	@Test(description = "Verify if the count API is giving correct response", groups = { "api", "smoke", "regression" })
 	public void countAPITest() throws IOException {
-
-		given().spec(requestSpecWithAuth(FD)).when().get("/dashboard/count").then().spec(responseSpec_OK())
+		dashboardService.count(FD) 
+		.then().spec(responseSpec_OK())
 				.body("message", equalTo("Success")).body("data", notNullValue()).body("data.size()", equalTo(3))
 				.body("data.count", everyItem(greaterThanOrEqualTo(0)))
 				.body("data.label", everyItem(not(blankOrNullString())))
@@ -33,7 +45,7 @@ public class CountAPIRequestTest {
 			"negative", "smoke", "regression" })
 	public void invalidHeaderTest() throws IOException {
 
-		given().spec(requestSpec()).when().get("/dashboard/count").then().spec(responseSpecWithStatusCode_TEXT(401));
+		dashboardService.count().then().spec(responseSpecWithStatusCode_TEXT(401));
 
 	}
 

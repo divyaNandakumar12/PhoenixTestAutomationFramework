@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredentials;
+import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
 import com.dataproviders.api.bean.UserBean;
 
@@ -23,15 +24,17 @@ import io.restassured.http.ContentType;
 
 public class LoginAPIExcelDataDrivenTest {
 	
+	private AuthService authService;
+	@BeforeMethod(description = "Initializing the auth service")
+	public void setup() {
+		authService=new AuthService();
+	}
 	
 	@Test(description = "verifying if login api is working for FD user",groups = {"api","regression","datadriven"},
 	dataProviderClass  = com.dataproviders.DataProviderUtil.class,
 	dataProvider = "LoginAPIExcelDataProvider")
 	public void loginAPITest(UserBean userBean ){	
-		given()
-		.spec(requestSpec(userBean))
-		.when()
-		.post("login")
+		authService.login(userBean)
 		.then()
 		.spec(SpecUtil.responseSpec_OK())
 		.body("message", equalTo("Success"))
