@@ -54,7 +54,7 @@ public class ApiTestListener implements ITestListener{
 
 	 
 	public void onFinish(ITestContext context) {
-		logger.info("**************Finished the Phoenix framework*************");
+		logger.info("**************Finish*************");
 	}
 	
 	
