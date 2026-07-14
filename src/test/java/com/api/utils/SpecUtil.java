@@ -34,7 +34,7 @@ public class SpecUtil {
 			requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
 					.setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(object)
 					.addFilter(new SensitiveDataFilter())
-					.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+					.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,21 +63,21 @@ public class SpecUtil {
 
 	public static ResponseSpecification responseSpec_OK() {
 		ResponseSpecification responseSpecification = new ResponseSpecBuilder().expectStatusCode(200)
-				.expectContentType(ContentType.JSON).expectResponseTime(Matchers.lessThan(1500L)).log(LogDetail.ALL)
+				.expectContentType(ContentType.JSON).expectResponseTime(Matchers.lessThan(1500L))
 				.build();
 		return responseSpecification;
 	}
 	
 	public static ResponseSpecification responseSpecWithStatusCode_JSON(int statusCode) {
 		ResponseSpecification responseSpecification = new ResponseSpecBuilder().expectStatusCode(statusCode)
-				.expectContentType(ContentType.JSON).expectResponseTime(Matchers.lessThan(1500L)).log(LogDetail.ALL)
+				.expectContentType(ContentType.JSON).expectResponseTime(Matchers.lessThan(1500L))
 				.build();
 		return responseSpecification;
 	}
 	
 	public static ResponseSpecification responseSpecWithStatusCode_TEXT(int statusCode) {
 		ResponseSpecification responseSpecification = new ResponseSpecBuilder().expectStatusCode(statusCode)
-				.expectResponseTime(Matchers.lessThan(1500L)).log(LogDetail.ALL)
+				.expectResponseTime(Matchers.lessThan(1500L))
 				.build();
 		return responseSpecification;
 	}
