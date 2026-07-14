@@ -14,6 +14,7 @@ import java.io.IOException;
 import org.hamcrest.Matchers;
 
 import com.api.constants.Role;
+import com.api.filters.SensitiveDataFilter;
 import com.api.request.model.UserCredentials;
 
 public class SpecUtil {
@@ -32,6 +33,7 @@ public class SpecUtil {
 		try {
 			requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
 					.setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(object)
+					.addFilter(new SensitiveDataFilter())
 					.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
