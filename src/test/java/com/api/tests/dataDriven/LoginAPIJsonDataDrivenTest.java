@@ -33,7 +33,7 @@ public class LoginAPIJsonDataDrivenTest {
 	@Test(description = "verifying if login api is working for FD user",groups = {"api","regression","datadriven"},
 	dataProviderClass  = com.dataproviders.DataProviderUtil.class,
 	dataProvider = "LoginAPIJsonDataProvider")
-	public void loginAPITest(UserCredentials userCredentials ){	
+	public void loginAPITest(UserBean userCredentials ){	
 		authService.login(userCredentials)
 		.then()
 		.spec(SpecUtil.responseSpec_OK())

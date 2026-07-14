@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.api.request.model.UserCredentials;
+import com.dataproviders.api.bean.UserBean;
 import com.fasterxml.jackson.databind.jsontype.impl.AsExistingPropertyTypeSerializer;
 
 import io.restassured.response.Response;
@@ -18,7 +19,7 @@ public class AuthService {
     
 	public Response login(Object userCredentials) {
 		
-		logger.info("Making the loging request for the payload {}",((UserCredentials)userCredentials).username());
+		logger.info("Making the loging request for the payload {}",((UserBean)userCredentials).getUsername());
 		Response response =
 				given().spec(requestSpec(userCredentials)).when().post(LOGIN_ENDPOINT);
 		return response;

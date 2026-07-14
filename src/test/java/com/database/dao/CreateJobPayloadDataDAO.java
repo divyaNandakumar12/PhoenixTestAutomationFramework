@@ -7,11 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.database.DatabaseManager;
 import com.dataproviders.api.bean.CreateJobBean;
 
 public class CreateJobPayloadDataDAO {
 
+	private static final Logger logger=LogManager.getLogger(CreateJobPayloadDataDAO.class);
 	private static String SQL_QUERY = """
 						select tc.first_name,tc.last_name,tc.mobile_number,tc.mobile_number_alt,
 			tc.email_id,tc.email_id_alt,tca.flat_number ,tca.apartment_name ,tca.street_name ,
@@ -53,8 +57,10 @@ public class CreateJobPayloadDataDAO {
 		ResultSet resultSet;
 		List<CreateJobBean> beanList=new ArrayList<CreateJobBean>();
 		try {
+			logger.info("Geting connection from the Database manager");
 			connection=DatabaseManager.getConnection();
 			statement=connection.createStatement();
+			logger.info("Executing the Sql query {}",SQL_QUERY);
 			resultSet=statement.executeQuery(SQL_QUERY);
 			while(resultSet.next()) {
 				CreateJobBean createJobBean=new CreateJobBean();
@@ -88,7 +94,7 @@ public class CreateJobPayloadDataDAO {
 				beanList.add(createJobBean);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.error("Cannot convert the result set to the bean",e);
 			e.printStackTrace();
 		}
 		
