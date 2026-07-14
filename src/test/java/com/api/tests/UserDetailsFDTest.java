@@ -8,12 +8,14 @@ import static org.hamcrest.Matchers.equalTo;
 import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.services.AuthService;
 import com.api.services.UserDetailsService;
 import com.api.utils.SpecUtil;
 
+@Listeners(com.listener.ApiTestListener.class)
 public class UserDetailsFDTest {
 	
 	private UserDetailsService userDetailsService;

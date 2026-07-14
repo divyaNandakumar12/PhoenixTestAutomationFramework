@@ -14,6 +14,7 @@ import java.util.Random;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Model;
@@ -39,7 +40,7 @@ import com.database.model.CustomerDBModel;
 import com.github.javafaker.Faker;
 
 import static com.api.utils.SpecUtil.*;
-
+@Listeners(com.listener.ApiTestListener.class)
 public class CreateJobApiTestWithFakeData {
 
 	private CreateJobPayload createJobPayload;
