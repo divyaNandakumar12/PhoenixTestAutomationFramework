@@ -22,8 +22,7 @@ public class SpecUtil {
 	public static RequestSpecification requestSpec() throws IOException {
 
 		RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
-				.setContentType(ContentType.JSON).setAccept(ContentType.JSON).log(LogDetail.URI).log(LogDetail.METHOD)
-				.log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+				.setContentType(ContentType.JSON).setAccept(ContentType.JSON).addFilter(new SensitiveDataFilter()).build();
 		return requestSpecification;
 	}
 
@@ -34,7 +33,7 @@ public class SpecUtil {
 			requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
 					.setContentType(ContentType.JSON).setAccept(ContentType.JSON).setBody(object)
 					.addFilter(new SensitiveDataFilter())
-					.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).build();
+					.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,8 +45,8 @@ public class SpecUtil {
 
 		RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
-				.addHeader("Authorization", AuthTokenProvider.getAuthToken(role))
-				.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+				.addHeader("Authorization", AuthTokenProvider.getAuthToken(role)).addFilter(new SensitiveDataFilter())
+				.build();
 		return requestSpecification;
 	}
 	
@@ -56,8 +55,8 @@ public class SpecUtil {
 		RequestSpecification requestSpecification = new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.addHeader("Authorization", AuthTokenProvider.getAuthToken(role))
-				.setBody(Payload)
-				.log(LogDetail.URI).log(LogDetail.METHOD).log(LogDetail.HEADERS).log(LogDetail.BODY).build();
+				.setBody(Payload).addFilter(new SensitiveDataFilter())
+				.build();
 		return requestSpecification;
 	}
 

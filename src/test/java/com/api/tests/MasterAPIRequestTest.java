@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredentials;
@@ -22,7 +23,7 @@ import com.api.utils.AuthTokenProvider;
 import com.api.utils.SpecUtil;
 
 import io.restassured.http.Header;
-
+@Listeners(com.listener.ApiTestListener.class)
 public class MasterAPIRequestTest {
 
 	private MasterService masterService;
