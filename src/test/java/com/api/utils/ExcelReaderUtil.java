@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -13,25 +15,27 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.api.request.model.UserCredentials;
+import com.api.services.JobService;
 import com.dataproviders.api.bean.UserBean;
 import com.google.common.collect.Table.Cell;
 import com.poiji.bind.Poiji;
 
 public class ExcelReaderUtil {
 
+	private static final Logger logger=LogManager.getLogger(ExcelReaderUtil.class);
 	public static <T> Iterator<T> loadTestData(String fileName,String sheetName,Class<T> clazz){
 		
-		
+		logger.info("Reading the test data from xlsx file and the sheetName is {}",sheetName);
 		InputStream isInputStream= Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		XSSFWorkbook myWorkbook = null;
 		try {
 			myWorkbook = new XSSFWorkbook(isInputStream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.error("Cannot read the excel file",fileName,e);
 			e.printStackTrace();
 		}
 		XSSFSheet mySheet= myWorkbook.getSheet(sheetName);
-		
+		logger.info("Converting the XSSFSheet {} to POJO class of type {}",sheetName,clazz);
 		List<T> list=Poiji.fromExcel(mySheet, clazz);
 		
 		
