@@ -8,12 +8,13 @@ import static org.hamcrest.Matchers.startsWith;
 import java.io.IOException;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constants.Role;
 import com.api.request.model.CreateJobPayload;
 import com.api.services.JobService;
-
+@Listeners(com.listener.ApiTestListener.class)
 public class CreateJobApiExcelDataDrivenTest {
 	
 	private JobService jobService;
