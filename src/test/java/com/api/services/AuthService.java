@@ -10,6 +10,7 @@ import com.api.request.model.UserCredentials;
 import com.dataproviders.api.bean.UserBean;
 import com.fasterxml.jackson.databind.jsontype.impl.AsExistingPropertyTypeSerializer;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class AuthService {
@@ -17,6 +18,7 @@ public class AuthService {
 	private static final String LOGIN_ENDPOINT = "login";
     private static final Logger logger=LogManager.getLogger(AuthService.class);
     
+    @Step("Peform login request with the UserCredentials")
 	public Response login(Object userCredentials) {
 		
 		logger.info("Making the loging request for the payload {}",((UserBean)userCredentials).getUsername());

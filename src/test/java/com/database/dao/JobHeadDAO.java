@@ -12,6 +12,8 @@ import com.database.DatabaseManager;
 import com.database.model.CustomerDBModel;
 import com.database.model.JobHeadModel;
 
+import io.qameta.allure.Step;
+
 public class JobHeadDAO {
 	private static final Logger logger=LogManager.getLogger(JobHeadDAO.class);
 	private static final String SQL_QUERY = """
@@ -22,6 +24,7 @@ public class JobHeadDAO {
 		
 	}
 
+	@Step("Retrieving the job head information from database for the specific customer id")
 	public static JobHeadModel getJobInfo(int customerId){
 		JobHeadModel jobHeadModel=null;
 		try {

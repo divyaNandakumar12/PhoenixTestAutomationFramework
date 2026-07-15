@@ -21,9 +21,17 @@ import static com.api.utils.SpecUtil.*;
 
 import static com.api.utils.ConfigManager.*;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 
 @Listeners(com.listener.ApiTestListener.class)
+@Epic("User Management")
+@Feature("Authentication")
 public class LoginAPITest {
 	
 	private UserBean userBean;
@@ -35,6 +43,9 @@ public class LoginAPITest {
 		authService=new AuthService();
 	}
 	
+	@Story("Valid user should be able to login into the system")
+	@Description("Verify if FD user is able to login via api")
+	@Severity(SeverityLevel.BLOCKER)
 	@Test(description = "verifying if login api is working for FD user",groups = {"api","regression","smoke"})
 	public void loginAPITest() throws IOException {
 		

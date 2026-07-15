@@ -12,6 +12,8 @@ import com.database.DatabaseManager;
 import com.database.model.CustomerProductDBModel;
 import com.database.model.MapJobProblemDBModel;
 
+import io.qameta.allure.Step;
+
 public class MapJobProblemDAO {
 
 	private static final Logger logger=LogManager.getLogger(MapJobProblemDAO.class);
@@ -23,6 +25,7 @@ public class MapJobProblemDAO {
 
 	}
 
+	@Step("Retrieving the problem details info from database for the specific tr_job_head_id ")
 	public static MapJobProblemDBModel getProblemInfo(int tr_job_head_id) {
 		MapJobProblemDBModel mapJobProblemDBModel = null;
 		try {

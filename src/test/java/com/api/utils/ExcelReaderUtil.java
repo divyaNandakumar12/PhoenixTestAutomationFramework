@@ -20,9 +20,13 @@ import com.dataproviders.api.bean.UserBean;
 import com.google.common.collect.Table.Cell;
 import com.poiji.bind.Poiji;
 
+import io.qameta.allure.Step;
+
 public class ExcelReaderUtil {
 
 	private static final Logger logger=LogManager.getLogger(ExcelReaderUtil.class);
+	
+	@Step("Loading test data from excel data")
 	public static <T> Iterator<T> loadTestData(String fileName,String sheetName,Class<T> clazz){
 		
 		logger.info("Reading the test data from xlsx file and the sheetName is {}",sheetName);

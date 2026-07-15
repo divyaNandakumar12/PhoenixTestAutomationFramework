@@ -12,6 +12,7 @@ import com.api.constants.Role;
 import com.api.request.model.CreateJobPayload;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 public class JobService {
@@ -20,6 +21,7 @@ public class JobService {
 	private static final String SEARCH_ENDPOINT="/job/search";
 	private static final Logger logger=LogManager.getLogger(JobService.class);
 
+	@Step("Creating Inwarranty job with create job API")
 	public Response master(Role role,CreateJobPayload createJobPayload) {
 		logger.info("making request to {} with the role {} and the payload ()", CREATEJOB_ENDPOINT,role,createJobPayload);
 		Response response=null;
@@ -32,6 +34,7 @@ public class JobService {
 		return response;
 	}
 	
+	@Step("Making search API request")
 	public Response search(Role role,Object payload) {
 		logger.info("making request to {} with the role {} and the payload ()", SEARCH_ENDPOINT,role,payload);
 		Response response=null;
