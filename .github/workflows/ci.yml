@@ -27,7 +27,10 @@ on:
         options: [testng.xml,smoke.xml,regression.xml,testng-dataDriven.xml]
         default: testng.xml
         required: true
-
+        
+permissions:
+  contents: write
+  
 jobs:
   test:
 
