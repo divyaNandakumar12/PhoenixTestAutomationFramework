@@ -16,6 +16,8 @@ import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.dataproviders.api.bean.CreateJobBean;
 
+import io.qameta.allure.Step;
+
 public class CustomerAddressDAO {
 
 	private static final Logger logger=LogManager.getLogger(CustomerAddressDAO.class);
@@ -36,6 +38,7 @@ public class CustomerAddressDAO {
 		
 	}
 
+	@Step("Retrieving the Customer address data from database for the specific customer address id")
 	public static CustomerAddressDBModel getCustomerAddress(int customerAddressId) {
 		CustomerAddressDBModel customerAddressDBModel = null;
 		try {

@@ -15,6 +15,8 @@ import com.database.DatabaseManager;
 import com.database.model.CustomerDBModel;
 import com.dataproviders.api.bean.CreateJobBean;
 
+import io.qameta.allure.Step;
+
 public class CustomerDAO {
 
 	private static final Logger logger=LogManager.getLogger(CustomerDAO.class);
@@ -26,6 +28,7 @@ public class CustomerDAO {
 		
 	}
 
+	@Step("Retrieving the Customer information from database for the specific customer id")
 	public static CustomerDBModel getCustomerInfo(int customerId){
 		CustomerDBModel customerDBModel=null;
 		try {

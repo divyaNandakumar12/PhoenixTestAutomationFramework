@@ -16,6 +16,7 @@ import com.api.constants.Role;
 import com.api.request.model.UserCredentials;
 import com.api.services.JobService;
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 
 public class AuthTokenProvider {
@@ -23,6 +24,7 @@ public class AuthTokenProvider {
 	private static Map<Role, String> tokenCache=new ConcurrentHashMap<Role, String>();
 	private static final Logger logger=LogManager.getLogger(AuthTokenProvider.class);
 
+	@Step("Getting the auth token for the role")
 	public static String getAuthToken(Role role) throws IOException {
 		logger.info("checking if the token for the {} is present in the cache",role);
 		if(tokenCache.containsKey(role)) {

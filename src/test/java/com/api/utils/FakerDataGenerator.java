@@ -17,6 +17,8 @@ import com.api.request.model.Problems;
 import com.api.services.JobService;
 import com.github.javafaker.Faker;
 
+import io.qameta.allure.Step;
+
 public class FakerDataGenerator {
 
 	private static Faker faker = new Faker(new Locale("en-IND"));
@@ -35,6 +37,7 @@ public class FakerDataGenerator {
 
 	}
 
+	@Step("Generating fake create job data")
 	public static CreateJobPayload generateFakeCreateJobData() {
         logger.info("Generating the fake payload for Create job");
 		Customer customer = generateFakeCustomerData();
@@ -47,6 +50,7 @@ public class FakerDataGenerator {
 		return createJobPayload;
 	}
 
+	@Step("Generating multiple fake create job data with count")
 	public static Iterator<CreateJobPayload> generateFakeCreateJobData(int count) {
 		logger.info("Generating the fake {} payloads for Create job",count);
 		List<CreateJobPayload> payloadList=new ArrayList<>();
@@ -63,6 +67,7 @@ public class FakerDataGenerator {
 		return payloadList.iterator();
 	}
 
+	@Step("Generating fake problem list for the createjob payload")
 	private static List<Problems> generateFakeProblemList() {
         int count =RANDOM.nextInt(3)+1;
         int randomIndex;
@@ -78,6 +83,7 @@ public class FakerDataGenerator {
 		return problemList;
 	}
 
+	@Step("Generating fake customer product info")
 	private static CustomerProduct generateFakeCustomerProductData() {
 		String dop = DateTimeUtil.getTimeWithDaysAgo(10);
 		String imeiSerialNumber = faker.numerify("###############");
@@ -88,6 +94,7 @@ public class FakerDataGenerator {
 		return customerProduct;
 	}
 
+	@Step("Generating fake customer address info")
 	private static CustomerAddress generateFakeCustomerAddressData() {
 		String flatNumber = faker.numerify("###");
 		String apartmentName = faker.address().streetName();
@@ -101,6 +108,7 @@ public class FakerDataGenerator {
 		return customerAddress;
 	}
 
+	@Step("Generating fake customer data")
 	private static Customer generateFakeCustomerData() {
 		String fname = faker.name().firstName();
 		String lname = faker.name().lastName();
