@@ -22,8 +22,16 @@ import com.api.services.MasterService;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.http.Header;
 @Listeners(com.listener.ApiTestListener.class)
+@Epic("Job Management")
+@Feature("Master API")
 public class MasterAPIRequestTest {
 
 	private MasterService masterService;
@@ -33,6 +41,9 @@ public class MasterAPIRequestTest {
 		masterService = new MasterService();
 	}
 
+	@Story("Master API should bring OEM details,problem,type,warranty status")
+	@Description("Verify if the master API response is shown correctly")
+	@Severity(SeverityLevel.BLOCKER)
 	@Test(description = "Verify if the master API is giving correct response",groups = {"api","smoke","regression"})
 	public void masterApiRequest() throws IOException {
 		
@@ -55,6 +66,7 @@ public class MasterAPIRequestTest {
 		
 	}
 
+	
 	@Test(description = "Verify if the master API is giving correct status code for invalid token", groups = { "api",
 			"negative", "smoke", "regression" })
 	public void invalidTokenMasterApi() throws IOException {

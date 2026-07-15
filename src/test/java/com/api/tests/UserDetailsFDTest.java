@@ -15,7 +15,16 @@ import com.api.services.AuthService;
 import com.api.services.UserDetailsService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 @Listeners(com.listener.ApiTestListener.class)
+@Epic("User Management")
+@Feature("User Details")
 public class UserDetailsFDTest {
 	
 	private UserDetailsService userDetailsService;
@@ -24,6 +33,10 @@ public class UserDetailsFDTest {
 		userDetailsService=new UserDetailsService();
 	}
 	
+	
+	@Story("User details should be shown")
+	@Description("Verify if the UserDetails API response is shown correctly")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Verify if the user details API response is shown correctly",groups = {"api","smoke","regression"})
 	public void userDetailsAPI() throws IOException {
 	
